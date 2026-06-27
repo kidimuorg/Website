@@ -10,16 +10,29 @@
 
    Fonts and Tabler Icons are kept as <link> tags in each code block
    (not @import here) to avoid CDN-chained loading delays.
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ═════════════════════════════════════════════════════════════════════════════════════ */
 
-/* ── Squarespace code block global settings ───────────────────────────────────── */
-.code-block     { margin: 0 !important; padding: 0 !important; width: 100%; background: #ffffff; }
+/* ─ Squarespace code block global settings ──────────────────────────────────────────── */
+.code-block { margin: 0 !important; padding: 0 !important; width: 100%; background: #ffffff; }
+.code-block * { box-sizing: border-box; margin: 0; padding: 0; color: inherit; font-family: 'Source Sans 3', sans-serif; }
+
+/* ─ Squarespace wrappers around the code block ──────────────────────────────────────── */
 .sqs-block-code { margin: 0 !important; padding: 0 !important; }
 .sqs-block      { margin: 0 !important; padding: 0 !important; }
 .page-section   { padding-top: 0 !important; padding-bottom: 0 !important; }
 [data-section-id] { padding-top: 0 !important; padding-bottom: 0 !important; }
 
+/* ─ Squarespace elements after the code block ───────────────────────────────────────── */
+.kidimu-page ~ * { margin-top: 0 !important; padding-top: 0 !important; }
 
+/* ─ General container settings for each outlined square colors applied on page ──────── */
+.kidimu-container {
+  padding: 1.5rem 1.5rem 1.75rem;
+  position: relative;
+  overflow: visible;
+  border-radius: 20px !important;
+  margin: 0rem .5rem .5rem;
+}
 /* ── Eyebrow pill — emoji + wiggle ──────────────────────────────────────────
    HTML pattern for every page's hero eyebrow pill:
 
