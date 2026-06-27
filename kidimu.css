@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   kidimu.css — Shared design system for kidimu.org
+   Hosted on GitHub, served via jsDelivr CDN.
+   Page-specific CSS stays in each Squarespace code block.
+
+   Each Squarespace code block should include these two tags instead of
+   the old inline font/icon <link> tags:
+
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&display=swap">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YOUR-ORG/kidimu-web@main/kidimu.css">
+     <script src="https://cdn.jsdelivr.net/gh/YOUR-ORG/kidimu-web@main/kidimu.js" defer></script>
+
+   Fonts and Tabler Icons are kept as <link> tags in each code block
+   (not @import here) to avoid CDN-chained loading delays.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ── Kill Squarespace section/block gaps ─────────────────────────────────────
+   Applied globally — safe because all KiDiMu pages use a single full-width
+   code block with no surrounding Squarespace content blocks.              */
+.code-block     { margin: 0 !important; padding: 0 !important; }
+.sqs-block-code { margin: 0 !important; padding: 0 !important; }
+.sqs-block      { margin: 0 !important; padding: 0 !important; }
+.page-section   { padding-top: 0 !important; padding-bottom: 0 !important; }
+[data-section-id] { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+
+/* ── Eyebrow pill — emoji + wiggle ──────────────────────────────────────────
+   HTML pattern for every page's hero eyebrow pill:
+
+     <span class="kidimu-eyebrow [prefix]-eyebrow">
+       <span class="kidimu-eyebrow-emoji">🦕</span>
+       <span class="kidimu-eyebrow-text" data-text="Your Text Here"></span>
+     </span>
+
+   Two classes on the pill:
+     kidimu-eyebrow  — triggers the wiggle (defined here, works globally)
+     [prefix]-eyebrow — used for page-specific color/style scoping
+
+   kidimu.js drives the typewriter on the text span.
+   This file drives the emoji wiggle on hover.                              */
+
+.kidimu-eyebrow-emoji {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.kidimu-eyebrow:hover .kidimu-eyebrow-emoji,
+.kidimu-eyebrow:focus .kidimu-eyebrow-emoji {
+  animation: kidEyebrowWiggle 0.45s ease forwards;
+}
+
+@keyframes kidEyebrowWiggle {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-18deg); }
+  50%  { transform: rotate(16deg); }
+  75%  { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+/* ── Discount badge ──────────────────────────────────────────────────────────
+   Used on any page that shows a discount callout (Birthday packages,
+   Membership toggle, Camp pricing, etc.).
+   Class: kidimu-discount-badge
+
+   Interactive version (e.g. Membership military toggle) — add
+   kidimu-discount-badge--active when the discount is applied:
+
+     el.classList.toggle('kidimu-discount-badge--active', isActive);
+
+   Static version (e.g. Birthday package cards) — just use the base class.  */
+
+.kidimu-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fbeaf0 !important;
+  border: 0.5px solid #f2b8d0 !important;
+  color: #b0305a !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 3px 10px;
+  border-radius: 100px;
+  line-height: 1.4;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.kidimu-discount-badge--active {
+  background: #E94F8A !important;
+  border-color: #E94F8A !important;
+  color: #ffffff !important;
+}
