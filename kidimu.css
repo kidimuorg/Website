@@ -1,11 +1,8 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   kidimu.css — Shared design system for kidimu.org
+   kidimu.css — Shared design template for kidimu.org pages
    Hosted on GitHub, served via jsDelivr CDN.
-   Page-specific CSS stays in each Squarespace code block.
 
-   Each Squarespace code block should include these two tags instead of
-   the old inline font/icon <link> tags:
-
+   Each Squarespace code block should include these four tags:
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&display=swap">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YOUR-ORG/kidimu-web@main/kidimu.css">
@@ -15,11 +12,8 @@
    (not @import here) to avoid CDN-chained loading delays.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-
-/* ── Kill Squarespace section/block gaps ─────────────────────────────────────
-   Applied globally — safe because all KiDiMu pages use a single full-width
-   code block with no surrounding Squarespace content blocks.              */
-.code-block     { margin: 0 !important; padding: 0 !important; }
+/* ── Squarespace code block global settings ───────────────────────────────────── */
+.code-block     { margin: 0 !important; padding: 0 !important; width: 100%; background: #ffffff; }
 .sqs-block-code { margin: 0 !important; padding: 0 !important; }
 .sqs-block      { margin: 0 !important; padding: 0 !important; }
 .page-section   { padding-top: 0 !important; padding-bottom: 0 !important; }
