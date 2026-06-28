@@ -26,7 +26,7 @@
 .kidimu-page ~ * { margin-top: 0 !important; padding-top: 0 !important; }
 
 /* ─ General container settings for each outlined square colors applied on page ──────── */
-.kidimu-container {
+.kidimu-card {
   padding: 1.5rem 1.5rem 1.75rem;
   position: relative;
   overflow: visible;
