@@ -34,7 +34,14 @@
   overflow: hidden;
   margin: 0rem .5rem .5rem;
   border: 0.5px solid #e0e0e0 !important;
+  background: #ffffff;
+}
+
+.kidimu-main {
   background: var(--accent, #ffffff);
+}
+
+.kidimu-sec {
 }
 
 /* ── Eyebrow pill — emoji + wiggle ──────────────────────────────────────────
