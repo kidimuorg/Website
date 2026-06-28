@@ -34,6 +34,7 @@
   overflow: hidden;
   margin: 0rem .5rem .5rem;
   border: 0.5px solid #e0e0e0 !important;
+  background: var(--accent, #ffffff);
 }
 
 /* ── Eyebrow pill — emoji + wiggle ──────────────────────────────────────────
