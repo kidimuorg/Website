@@ -88,3 +88,31 @@ function kidimuTypewriter(selector, charDelay, startDelay) {
   }
   setTimeout(autoInit, 500);
 })();
+
+function khRunTypewriter() {
+  var el = document.querySelector('#kidimu-hours .kidimu-type');
+  if (!el) return;
+  var emojiEl  = el.querySelector('.kidimu-type-emoji');
+  var textNode = el.querySelector('.kidimu-type-text');
+  if (!textNode) return;
+  var bar = document.getElementById('kh-status-text');
+  var statusText = bar ? bar.textContent : '';
+
+  if (/closed/i.test(statusText)) {
+    if (emojiEl) emojiEl.textContent = '\uD83D\uDD34';
+  } else {
+    if (emojiEl) emojiEl.textContent = '\uD83D\uDFE2';
+  }
+
+  textNode.textContent = '';
+  if (window._khTypewriterTimer) clearTimeout(window._khTypewriterTimer);
+  var i = 0;
+  function tick() {
+    if (i <= statusText.length) {
+      textNode.textContent = statusText.slice(0, i);
+      i++;
+      window._khTypewriterTimer = setTimeout(tick, 55);
+    }
+  }
+  setTimeout(tick, 150);
+}
