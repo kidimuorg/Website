@@ -307,7 +307,7 @@ function kidimuRunTypewriter(selector, emoji, statusText) {
       window._kidimuTypewriterTimer = setTimeout(tick, 55);
     }
   }
-  setTimeout(tick, 150);
+  window._kidimuTypewriterStart = setTimeout(tick, 150);
 }
 /* ─ Auto-init: runs kidimuTypewriter on every static pill on page load ───────────────── */
 (function () {
