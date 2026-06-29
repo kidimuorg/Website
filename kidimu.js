@@ -118,13 +118,13 @@ function khRunTypewriter() {
 }
 
 
-// ─ Load Google Calendar fresh or from cache ─────────────────────────────────────────────
+/* ─ Load Google Calendar fresh or from cache ────────────────────────────────────────── */
 function kidimuLoadCalendar() {
   var dates = kidimuWindowDates();
   var winEnd = new Date(dates[6]); winEnd.setDate(winEnd.getDate() + 1);
   var wLabel = document.getElementById('kidimu-week-label');
   if (wLabel) wLabel.textContent = kidimuFmtMonDay(dates[0]) + ' \u2013 ' + kidimuFmtMonDay(dates[6]);
-  // ─ Check session cache and fetch ──────────────────────────────────────────────────────
+  /* ─ Check session cache and fetch ─────────────────────────────────────────────────── */
   var cacheKey = 'kidimu-calendar-' + kidimuDateKey(dates[0]);
   try {
     var cached = sessionStorage.getItem(cacheKey);
@@ -133,7 +133,7 @@ function kidimuLoadCalendar() {
       return;
     }
   } catch(e) {}
-  // ─ Fetch fresh copy from Google Calendar ──────────────────────────────────────────────
+  /* ─ Fetch fresh copy from Google Calendar ─────────────────────────────────────────── */
   var url = 'https://www.googleapis.com/calendar/v3/calendars/'
           + encodeURIComponent(KIDIMU_CAL_ID)
           + '/events?key=' + KIDIMU_API_KEY
