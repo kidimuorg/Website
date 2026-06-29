@@ -39,11 +39,11 @@
 
 .kidimu-main {
   background: var(--accent, #ffffff);
+  color: var(--text, #000000);
 }
 
-.kidimu-main h1 {color: var(--heading, #000000); }
-.kidimu-main h2 {color: var(--subheading, #000000); }
-.kidimu-main p  {color: var(--text, #000000) ;
+.kidimu-main h1 {color: var(--heading, #000000);}
+.kidimu-main h2 {color: var(--subheading, #000000);}
 
 /* ── Eyebrow pill — emoji + wiggle ──────────────────────────────────────────
    HTML pattern for every page's hero eyebrow pill:
