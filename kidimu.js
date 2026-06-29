@@ -309,6 +309,14 @@ function kidimuRunTypewriter(selector, emoji, statusText) {
   }
   window._kidimuTypewriterStart = setTimeout(tick, 150);
 }
+/* ─ Add a guard so hoursInit only runs once ──────────────────────────────────────────── */
+var _hoursInitDone = false;
+function hoursInit() {
+  if (_hoursInitDone) return;
+  if (typeof kidimuLoadCalendar !== 'function') { setTimeout(hoursInit, 50); return; }
+  _hoursInitDone = true;
+  kidimuLoadCalendar();
+}
 /* ─ Auto-init: runs kidimuTypewriter on every static pill on page load ───────────────── */
 (function () {
   function autoInit() {
