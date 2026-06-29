@@ -1,8 +1,8 @@
-/* ═══════════════════════════════════════════════════════════════════════════
+/* ─ General Info ─────────────────────────────────────────────────────────────────────────
    kidimu.css — Shared design template for kidimu.org pages
    Hosted on GitHub, served via jsDelivr CDN.
 
-   Each Squarespace code block should include these four tags:
+   Each Squarespace code block should include these tags:
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&display=swap">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YOUR-ORG/kidimu-web@main/kidimu.css">
@@ -10,7 +10,7 @@
 
    Fonts and Tabler Icons are kept as <link> tags in each code block
    (not @import here) to avoid CDN-chained loading delays.
-   ═════════════════════════════════════════════════════════════════════════════════════ */
+──────────────────────────────────────────────────────────────────────────────────────── */
 
 /* ─ Squarespace code block global settings ──────────────────────────────────────────── */
 .code-block { margin: 0 !important; padding: 0 !important; width: 100%; background: #ffffff; }
@@ -24,7 +24,7 @@
 /* ─ Squarespace elements after the code block ───────────────────────────────────────── */
 .kidimu-page ~ * { margin-top: 0 !important; padding-top: 0 !important; }
 
-/* ─ General container settings for each outlined square colors applied on page ──────── */
+/* ─ General card container settings for each outlined square colors applied on page ─── */
 .kidimu-card, .kidimu-card * {
   box-sizing: border-box;
   margin: 0;
@@ -43,12 +43,12 @@
   background: #ffffff;
 }
 
-/* ─ Main Cards ───────────────────────────────────────── */
+/* ─ Main Cards ──────────────────────────────────────────────────────────────────────── */
 .kidimu-main {
   background: var(--accent, #ffffff);
   color: var(--text, #000000) !important;
 }
-/* ─ Circles in Main Cards ───────────────────────────────────────── */
+/* ─ Circles in Main Cards ───────────────────────────────────────────────────────────── */
 .kidimu-blobs {
   position: absolute;
   inset: 0;
@@ -72,7 +72,7 @@
   border-radius: 50%;
   background: rgba(255,255,255,0.07);
 }
-/* ─ Set text in Mian Cars ───────────────────────────────────────── */
+/* ─ Set text in Mian Cars ───────────────────────────────────────────────────────────── */
 .kidimu-main h1 {
   font-family: 'Poppins', sans-serif !important;
   font-size: 46px !important;
@@ -80,30 +80,27 @@
   color: var(--heading, #000000) !important;
 }
 .kidimu-main h2 {color: var(--subheading, #000000) !important;}
-
-
-/* ── Eyebrow pill — emoji + wiggle ──────────────────────────────────────────
-   HTML pattern for every page's hero eyebrow pill:
-
-     <span class="kidimu-eyebrow [prefix]-eyebrow">
-       <span class="kidimu-eyebrow-emoji">🦕</span>
-       <span class="kidimu-eyebrow-text" data-text="Your Text Here"></span>
-     </span>
-
-   Two classes on the pill:
-     kidimu-eyebrow  — triggers the wiggle (defined here, works globally)
-     [prefix]-eyebrow — used for page-specific color/style scoping
-
-   kidimu.js drives the typewriter on the text span.
-   This file drives the emoji wiggle on hover.                              */
-
-.kidimu-eyebrow-emoji {
+/* ── Typewriter pill + emoji + wiggle ───────────────────────────────────────────────── */
+.kidimu-type {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.25) !important;
+  border: 0.5px solid rgba(255,255,255,0.4) !important;
+  color: inherit !important;
+}
+.kidimu-type-emoji {
   display: inline-block;
   transition: transform 0.15s ease;
 }
-
-.kidimu-eyebrow:hover .kidimu-eyebrow-emoji,
-.kidimu-eyebrow:focus .kidimu-eyebrow-emoji {
+.kidimu-type:hover .kidimu-type-emoji,
+.kidimu-type:focus .kidimu-type-emoji {
   animation: kidEyebrowWiggle 0.45s ease forwards;
 }
 
