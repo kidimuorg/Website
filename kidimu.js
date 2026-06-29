@@ -51,14 +51,14 @@
  * @param {number} [startDelay=200]              ms before typing starts
  */
 function kidimuTypewriter(selector, charDelay, startDelay) {
-  selector   = selector   !== undefined ? selector   : '.kidimu-eyebrow';
+  selector   = selector   !== undefined ? selector   : '.kidimu-type';
   charDelay  = charDelay  !== undefined ? charDelay  : 100;
   startDelay = startDelay !== undefined ? startDelay : 200;
 
   var el = document.querySelector(selector);
   if (!el) return;
 
-  var textNode = el.querySelector('.kidimu-eyebrow-text');
+  var textNode = el.querySelector('.kidimu-type-text');
   if (!textNode) return;
 
   var full = textNode.getAttribute('data-text') || '';
@@ -72,6 +72,19 @@ function kidimuTypewriter(selector, charDelay, startDelay) {
       setTimeout(tick, charDelay);
     }
   }
-
   setTimeout(tick, startDelay);
 }
+
+(function () {
+  function autoInit() {
+    document.querySelectorAll('.kidimu-type').forEach(function (pill) {
+      kidimuTypewriter('#' + pill.closest('[id]').id + ' .kidimu-type');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+  setTimeout(autoInit, 500);
+})();
