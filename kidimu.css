@@ -48,6 +48,12 @@
   background: var(--accent, #ffffff);
   color: var(--text, #000000) !important;
 }
+.kidimu-main-sub {
+  display: block;
+  font-size: 22px !important;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
 /* ─ Circles in Main Cards ───────────────────────────────────────────────────────────── */
 .kidimu-blobs {
   position: absolute;
