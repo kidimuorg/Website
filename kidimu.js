@@ -3,29 +3,7 @@
    Hosted on GitHub, served via jsDelivr CDN.
    Load with <script src="..." defer></script> in each Squarespace code block.
 
-   This file only defines functions — it does not call anything automatically.
-   Each page is responsible for calling kidimuTypewriter() after the DOM loads.
 
-   Standard pattern for each page (at the bottom of the code block):
-
-     <script>
-       document.addEventListener('DOMContentLoaded', function() {
-         kidimuTypewriter('.kidimu-eyebrow');
-       });
-     </script>
-
-   If Squarespace injects the code block after DOMContentLoaded fires, add
-   a setTimeout fallback:
-
-     <script>
-       function initPage() { kidimuTypewriter('.kidimu-eyebrow'); }
-       if (document.readyState === 'loading') {
-         document.addEventListener('DOMContentLoaded', initPage);
-       } else {
-         initPage();
-       }
-       setTimeout(initPage, 500); // Squarespace late-injection safety net
-     </script>
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ═ Calendar HTML in <script> ═════════════════════════════════════════════════════════════
@@ -232,23 +210,12 @@ function kidimuRenderCalendar(events, dates) {
   }
   kidimuUpdateHours(openNow, byDay, todayKey, nowMins, dates);
 }
-/* ─ Creates error message if needed ──────────────────────────────────────────────────── */
-function kidimuCalendarError(msg) {
-  var body = document.getElementById('hours-body');
-  if (body) body.innerHTML = '<div class="hours-cal-error">' + msg + '</div>';
-  kidimuRunTypewriter('Call us for today\u2019s hours');
-}
-
-/* ═ Typewriter HTML layout called by the calendar ═════════════════════════════════════════
-    <span class="kidimu-type">
-      <span class="kidimu-type-emoji">🕐</span>
-      <span class="kidimu-type-text"></span>
-    </span>
-═════════════════════════════════════════════════════════════════════════════════════════ */
 /* ─ Determines the Hours page typewriter text ────────────────────────────────────────── */
 function kidimuUpdateHours(openNow, byDay, todayKey, nowMins, dates) {
   var statusText = '';
+  var emoji = '';
   if (openNow) {
+    emoji = '\uD83D\uDFE2'; // 🟢
     var session = null;
     (byDay[todayKey] || []).filter(function(e){ return e.type==='public' && !e.cancelled && !e.allDay; }).forEach(function(ev){
       var s = kidimuTimeToMins(ev.start), e = kidimuTimeToMins(ev.end);
@@ -256,6 +223,7 @@ function kidimuUpdateHours(openNow, byDay, todayKey, nowMins, dates) {
     });
     statusText = session ? 'Open now until ' + kidimuFmtTime(session.end) : 'Open now';
   } else {
+    emoji = '\uD83D\uDD34'; // 🔴
     var nextEv = null;
     var today = kidimuTodayPacific();
     var tomorrow = new Date(today.getTime() + 86400000);
@@ -279,17 +247,57 @@ function kidimuUpdateHours(openNow, byDay, todayKey, nowMins, dates) {
       statusText = 'Currently closed';
     }
   }
-  kidimuRunTypewriter(statusText);
+  kidimuRunTypewriter('.kidimu-type', emoji, statusText);
 }
-/* ─ Typewriter updater ───────────────────────────────────────────────────────────────── */
-function kidimuRunTypewriter(statusText) {
-  var el = document.querySelector('.kidimu-type');
+/* ─ Creates error message if needed ──────────────────────────────────────────────────── */
+function kidimuCalendarError(msg) {
+  var body = document.getElementById('hours-body');
+  if (body) body.innerHTML = '<div class="hours-cal-error">' + msg + '</div>';
+  kidimuRunTypewriter('Call us for today\u2019s hours');
+}
+
+/* ═ Typewriter HTML layout called by the calendar ═════════════════════════════════════════
+    <span class="kidimu-type">
+      <span class="kidimu-type-emoji">🕐</span>
+      <span class="kidimu-type-text" data-text="Type your text here"></span>
+    </span>
+═════════════════════════════════════════════════════════════════════════════════════════ */
+/* ─ Generic typewriter reads data-text from the span ─────────────────────────────────── */
+function kidimuTypewriter(selector, charDelay, startDelay) {
+  selector   = selector   !== undefined ? selector   : '.kidimu-type';
+  charDelay  = charDelay  !== undefined ? charDelay  : 100;
+  startDelay = startDelay !== undefined ? startDelay : 200;
+
+  var el = document.querySelector(selector);
+  if (!el) return;
+
+  var textNode = el.querySelector('.kidimu-type-text');
+  if (!textNode) return;
+
+  var full = textNode.getAttribute('data-text') || '';
+  if (!full) return;
+
+  textNode.textContent = '';
+  var i = 0;
+
+  function tick() {
+    if (i <= full.length) {
+      textNode.textContent = full.slice(0, i);
+      i++;
+      setTimeout(tick, charDelay);
+    }
+  }
+  setTimeout(tick, startDelay);
+}
+/* ─ Runs typewriter with one off information  ────────────────────────────────────────── */
+function kidimuRunTypewriter(selector, emoji, statusText) {
+  var el = document.querySelector(selector);
   if (!el) return;
   var emojiEl  = el.querySelector('.kidimu-type-emoji');
   var textNode = el.querySelector('.kidimu-type-text');
   if (!textNode) return;
 
-  if (emojiEl) emojiEl.textContent = /closed/i.test(statusText) ? '\uD83D\uDD34' : '\uD83D\uDFE2';
+  if (emojiEl && emoji) emojiEl.textContent = emoji;
   textNode.setAttribute('data-text', statusText);
 
   if (window._kidimuTypewriterTimer) clearTimeout(window._kidimuTypewriterTimer);
@@ -304,3 +312,21 @@ function kidimuRunTypewriter(statusText) {
   }
   setTimeout(tick, 150);
 }
+/* ─ Auto-init: runs kidimuTypewriter on every static pill on page load ───────────────── */
+(function () {
+  function autoInit() {
+    document.querySelectorAll('.kidimu-type').forEach(function (pill) {
+      var textNode = pill.querySelector('.kidimu-type-text');
+      if (!textNode || !textNode.getAttribute('data-text')) return; // skip dynamic pills
+      var parent = pill.closest('[id]');
+      if (!parent) return;
+      kidimuTypewriter('#' + parent.id + ' .kidimu-type');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+  setTimeout(autoInit, 500);
+})();
