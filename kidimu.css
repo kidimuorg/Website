@@ -43,19 +43,44 @@
   background: #ffffff;
 }
 
+/* ─ Main Cards ───────────────────────────────────────── */
 .kidimu-main {
   background: var(--accent, #ffffff);
   color: var(--text, #000000) !important;
 }
-
+/* ─ Circles in Main Cards ───────────────────────────────────────── */
+.kidimu-blobs {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.kidimu-blobs::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+}
+.kidimu-blobs::after {
+  content: '';
+  position: absolute;
+  bottom: -50px; left: 60%;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+}
+/* ─ Set text in Mian Cars ───────────────────────────────────────── */
 .kidimu-main h1 {
   font-family: 'Poppins', sans-serif !important;
   font-size: 46px !important;
   font-weight: 700 !important;
   color: var(--heading, #000000) !important;
 }
-
 .kidimu-main h2 {color: var(--subheading, #000000) !important;}
+
 
 /* ── Eyebrow pill — emoji + wiggle ──────────────────────────────────────────
    HTML pattern for every page's hero eyebrow pill:
