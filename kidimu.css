@@ -109,7 +109,6 @@
 .kidimu-type:focus .kidimu-type-emoji {
   animation: kidEyebrowWiggle 0.45s ease forwards;
 }
-
 @keyframes kidEyebrowWiggle {
   0%   { transform: rotate(0deg); }
   20%  { transform: rotate(-18deg); }
@@ -117,7 +116,70 @@
   75%  { transform: rotate(-10deg); }
   100% { transform: rotate(0deg); }
 }
-
+/* ── Note block ───────────────────────────────────────────────────────────────────────── */
+.kidimu-note {
+  background-color: var(--notes, #000000) !important;
+  border-left: 3px solid var(--accent, #000000) !important;
+  border-radius: 0 12px 12px 0 !important;
+  padding: .75rem 1rem;
+  font-size: 17px !important;
+  color: #555555 !important;
+  line-height: 1.5;
+  margin-top: 1rem;
+  display: block;
+}
+.kidimu-note strong {
+  color: #111111 !important;
+  font-weight: 600 !important;
+}
+/* ── Section label ────────────────────────────────────────────────────────────────────── */
+.kidimu-section-label {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--section, #5aaa20) !important;
+  margin-bottom: 1rem;
+  display: block;
+}
+/* ── Legend ───────────────────────────────────────────────────────────────────────────── */
+.kidimu-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 0.5px solid #ebebeb !important;
+}
+.kidimu-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 17px !important;
+  color: #666666 !important;
+}
+.kidimu-legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+/* ── Adding Columns ───────────────────────────────────────────────────────────────────── */
+.kidimu-cols {
+  padding: 0 0.5rem 0.5rem;
+  display: grid;
+  grid-template-columns: var(--col-split, 1fr 1fr);
+  gap: 0.5rem;
+  align-items: start;
+}
+/* ── Mobile Columns ───────────────────────────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .kidimu-cols { 
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+  }
+}
 
 /* ── Discount badge ──────────────────────────────────────────────────────────
    Used on any page that shows a discount callout (Birthday packages,
