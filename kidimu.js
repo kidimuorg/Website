@@ -117,7 +117,24 @@ function khRunTypewriter() {
   setTimeout(tick, 150);
 }
 
+/* ═ Calendar HTML in <script> ════════════════════════════════════════════════════════════
+  var KIDIMU_CAL_ID  = 'svc-kidimu@kidimu.org';
+  var KIDIMU_API_KEY = 'AIzaSyAcWpCl34TJCmc3AMgqZNYjKxScf524maE';
 
+  function hoursInit() {
+    if (typeof kidimuLoadCalendar !== 'function') {
+      setTimeout(hoursInit, 50);
+      return;
+    }
+    kidimuLoadCalendar();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hoursInit);
+  } else {
+    hoursInit();
+  }
+════════════════════════════════════════════════════════════════════════════════════════ */
 /* ─ Load Google Calendar fresh or from cache ────────────────────────────────────────── */
 function kidimuLoadCalendar() {
   var dates = kidimuWindowDates();
