@@ -26,6 +26,14 @@
 .kidimu-page ~ * { margin-top: 0 !important; padding-top: 0 !important; }
 
 /* ─ General container settings for each outlined square colors applied on page ──────── */
+.kidimu-card, .kidimu-card * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
 .kidimu-card {
   padding: 1.5rem 1.5rem 1.75rem;
   position: relative;
