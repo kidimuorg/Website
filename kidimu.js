@@ -1,11 +1,8 @@
-/* ═══════════════════════════════════════════════════════════════════════════
+/* ═════════════════════════════════════════════════════════════════════════════════════════
    kidimu.js — Shared JavaScript for kidimu.org
    Hosted on GitHub, served via jsDelivr CDN.
-   Load with <script src="..." defer></script> in each Squarespace code block.
-
-
-   ═══════════════════════════════════════════════════════════════════════════ */
-
+   <script src="https://cdn.jsdelivr.net/gh/kidimuorg/website@main/kidimu.js" defer></script>
+═════════════════════════════════════════════════════════════════════════════════════════ */
 /* ═ Calendar HTML in <script> ═════════════════════════════════════════════════════════════
   var KIDIMU_CAL_ID  = 'svc-kidimu@kidimu.org';
   var KIDIMU_API_KEY = 'AIzaSyAcWpCl34TJCmc3AMgqZNYjKxScf524maE';
