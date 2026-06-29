@@ -14,7 +14,6 @@
 
 /* ─ Squarespace code block global settings ──────────────────────────────────────────── */
 .code-block { margin: 0 !important; padding: 0 !important; width: 100%; background: #ffffff; }
-.code-block * { box-sizing: border-box; margin: 0; padding: 0; color: inherit; font-family: 'Source Sans 3', sans-serif; }
 
 /* ─ Squarespace wrappers around the code block ──────────────────────────────────────── */
 .sqs-block-code { margin: 0 !important; padding: 0 !important; }
