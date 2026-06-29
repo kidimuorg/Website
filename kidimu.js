@@ -293,11 +293,10 @@ function kidimuRunTypewriter(selector, emoji, statusText) {
   var emojiEl  = el.querySelector('.kidimu-type-emoji');
   var textNode = el.querySelector('.kidimu-type-text');
   if (!textNode) return;
-
   if (emojiEl && emoji) emojiEl.textContent = emoji;
   textNode.setAttribute('data-text', statusText);
-
   if (window._kidimuTypewriterTimer) clearTimeout(window._kidimuTypewriterTimer);
+  if (window._kidimuTypewriterStart) clearTimeout(window._kidimuTypewriterStart);
   textNode.textContent = '';
   var i = 0;
   function tick() {
@@ -309,20 +308,12 @@ function kidimuRunTypewriter(selector, emoji, statusText) {
   }
   window._kidimuTypewriterStart = setTimeout(tick, 150);
 }
-/* ─ Add a guard so hoursInit only runs once ──────────────────────────────────────────── */
-var _hoursInitDone = false;
-function hoursInit() {
-  if (_hoursInitDone) return;
-  if (typeof kidimuLoadCalendar !== 'function') { setTimeout(hoursInit, 50); return; }
-  _hoursInitDone = true;
-  kidimuLoadCalendar();
-}
 /* ─ Auto-init: runs kidimuTypewriter on every static pill on page load ───────────────── */
 (function () {
   function autoInit() {
     document.querySelectorAll('.kidimu-type').forEach(function (pill) {
       var textNode = pill.querySelector('.kidimu-type-text');
-      if (!textNode || !textNode.getAttribute('data-text')) return; // skip dynamic pills
+      if (!textNode || !textNode.getAttribute('data-text')) return;
       var parent = pill.closest('[id]');
       if (!parent) return;
       kidimuTypewriter('#' + parent.id + ' .kidimu-type');
@@ -333,5 +324,4 @@ function hoursInit() {
   } else {
     autoInit();
   }
-  setTimeout(autoInit, 500);
 })();
