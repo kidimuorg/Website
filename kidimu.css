@@ -133,7 +133,7 @@
   font-weight: 600 !important;
 }
 /* ── Section label ────────────────────────────────────────────────────────────────────── */
-.kidimu-section-label {
+.kidimu-section {
   font-family: 'Poppins', sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
@@ -142,6 +142,29 @@
   color: var(--section, #5aaa20) !important;
   margin-bottom: 1rem;
   display: block;
+}
+/* ── SubSection label ─────────────────────────────────────────────────────────────────── */
+.kidimu-subsection {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 25px !important;
+  font-weight: 600 !important;
+  color: #111111 !important;
+  margin-bottom: 1rem;
+}
+/* ── Big text ─────────────────────────────────────────────────────────────────────────── */
+.kidimu-b-text {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 600 !important;
+  color: #111111 !important;
+  margin-bottom: 1rem;
+}
+/* ── Little text ──────────────────────────────────────────────────────────────────────── */
+.kidimu-l-text {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 13px !important;
+  color: #555555 !important;
+  margin-bottom: 1rem;
 }
 /* ── Legend ───────────────────────────────────────────────────────────────────────────── */
 .kidimu-legend {
