@@ -117,13 +117,14 @@ function khRunTypewriter() {
   setTimeout(tick, 150);
 }
 
+
+// ─ Load Google Calendar fresh or from cache ─────────────────────────────────────────────
 function kidimuLoadCalendar() {
   var dates = kidimuWindowDates();
   var winEnd = new Date(dates[6]); winEnd.setDate(winEnd.getDate() + 1);
   var wLabel = document.getElementById('kidimu-week-label');
   if (wLabel) wLabel.textContent = kidimuFmtMonDay(dates[0]) + ' \u2013 ' + kidimuFmtMonDay(dates[6]);
-
-  // ── Check session cache first ─────────────────────────────────────────
+  // ─ Check session cache and fetch ──────────────────────────────────────────────────────
   var cacheKey = 'kidimu-calendar-' + kidimuDateKey(dates[0]);
   try {
     var cached = sessionStorage.getItem(cacheKey);
@@ -132,15 +133,13 @@ function kidimuLoadCalendar() {
       return;
     }
   } catch(e) {}
-
-  // ── Fetch from Google Calendar ────────────────────────────────────────
+  // ─ Fetch fresh copy from Google Calendar ──────────────────────────────────────────────
   var url = 'https://www.googleapis.com/calendar/v3/calendars/'
           + encodeURIComponent(KIDIMU_CAL_ID)
           + '/events?key=' + KIDIMU_API_KEY
           + '&timeMin=' + encodeURIComponent(dates[0].toISOString())
           + '&timeMax=' + encodeURIComponent(winEnd.toISOString())
           + '&singleEvents=true&orderBy=startTime&maxResults=100';
-
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
   xhr.onload = function() {
