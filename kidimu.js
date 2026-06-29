@@ -116,3 +116,44 @@ function khRunTypewriter() {
   }
   setTimeout(tick, 150);
 }
+
+function kidimuLoadCalendar() {
+  var dates = kidimuWindowDates();
+  var winEnd = new Date(dates[6]); winEnd.setDate(winEnd.getDate() + 1);
+  var wLabel = document.getElementById('kidimu-week-label');
+  if (wLabel) wLabel.textContent = kidimuFmtMonDay(dates[0]) + ' \u2013 ' + kidimuFmtMonDay(dates[6]);
+
+  // ── Check session cache first ─────────────────────────────────────────
+  var cacheKey = 'kidimu-calendar-' + kidimuDateKey(dates[0]);
+  try {
+    var cached = sessionStorage.getItem(cacheKey);
+    if (cached) {
+      kidimuRenderCalendar(JSON.parse(cached), dates);
+      return;
+    }
+  } catch(e) {}
+
+  // ── Fetch from Google Calendar ────────────────────────────────────────
+  var url = 'https://www.googleapis.com/calendar/v3/calendars/'
+          + encodeURIComponent(KIDIMU_CAL_ID)
+          + '/events?key=' + KIDIMU_API_KEY
+          + '&timeMin=' + encodeURIComponent(dates[0].toISOString())
+          + '&timeMax=' + encodeURIComponent(winEnd.toISOString())
+          + '&singleEvents=true&orderBy=startTime&maxResults=100';
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var items = JSON.parse(xhr.responseText).items || [];
+      try { sessionStorage.setItem(cacheKey, JSON.stringify(items)); } catch(e) {}
+      kidimuRenderCalendar(items, dates);
+    } else {
+      kidimuCalendarError('Could not load calendar. Please call us or check our social media for current hours.');
+    }
+  };
+  xhr.onerror = function() {
+    kidimuCalendarError('Could not reach the calendar. Please call us for current hours.');
+  };
+  xhr.send();
+}
