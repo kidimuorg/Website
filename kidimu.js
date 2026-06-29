@@ -247,13 +247,13 @@ function kidimuUpdateHours(openNow, byDay, todayKey, nowMins, dates) {
       statusText = 'Currently closed';
     }
   }
-  kidimuRunTypewriter('.kidimu-type', emoji, statusText);
+  kidimuRunTypewriter('#hours .kidimu-type', emoji, statusText);
 }
 /* ─ Creates error message if needed ──────────────────────────────────────────────────── */
 function kidimuCalendarError(msg) {
   var body = document.getElementById('hours-body');
   if (body) body.innerHTML = '<div class="hours-cal-error">' + msg + '</div>';
-  kidimuRunTypewriter('Call us for today\u2019s hours');
+  kidimuRunTypewriter('#hours .kidimu-type', '\uD83D\uDD34', 'We are sorry there was an error. Please call us for today\u2019s hours');
 }
 
 /* ═ Typewriter HTML layout called by the calendar ═════════════════════════════════════════
